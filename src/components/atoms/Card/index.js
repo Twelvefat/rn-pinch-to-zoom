@@ -78,13 +78,13 @@ export default class Card extends Component {
         const translateX = this.translateX
         const translateY = this.translateY
         return (
-            <Animated.View style={[styles.container]}>
+            <Animated.View style={[styles.container,{zIndex: this.state.zIndex}]}>
                 <PinchGestureHandler 
                         ref={this.pinchHandler}
                         onGestureEvent={this.handleGesturePinch} 
                         onHandlerStateChange={this._onGestureStateChangePinch}
                     >
-                    <Animated.View>
+                    <Animated.View style={StyleSheet.absoluteFill}>
                         <PanGestureHandler
                             ref={this.panHandler}
                             onGestureEvent={this.handleGesture}
@@ -92,7 +92,7 @@ export default class Card extends Component {
                             minPointers={2}
                             simultaneousHandlers={this.pinchHandler}
                         >
-                            <Animated.View>
+                            <Animated.View style={StyleSheet.absoluteFill}>
                                 <Swiper
                                     loop={false}
                                     height={width}
@@ -102,15 +102,6 @@ export default class Card extends Component {
                                         source={{uri: item.image}}
                                         style={[styles.image, {
                                             transform: [{scale}, {translateX}, {translateY}],
-                                            position:"absolute", zIndex: this.state.zIndex
-                                        }]}
-                                        resizeMode="cover"
-                                    />
-                                    <Animated.Image 
-                                        source={{uri: item.image}}
-                                        style={[styles.image, {
-                                            transform: [{scale}, {translateX}, {translateY}],
-                                            position:"absolute", zIndex: this.state.zIndex
                                         }]}
                                         resizeMode="cover"
                                     />
@@ -128,12 +119,14 @@ const {width} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
     container: {
-        flex:1,
         backgroundColor:"red",
+        width:width,
+        height:width
     },
     image: {
-        width: width,
-        height: width,
+        ...StyleSheet.absoluteFillObject,
+        width: undefined,
+        height: undefined,
     },
     imageWrapper: {
         marginVertical:20
