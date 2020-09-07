@@ -75,7 +75,7 @@ export default class Card extends Component {
         const translateX = this.translateX
         const translateY = this.translateY
         return (
-            <Animated.View style={styles.container(this.state.zIndex, item.bg)}>
+            <Animated.View style={styles.container(item.bg)}>
                 <View style={styles.profile}>
                     <View>
                         <Image 
@@ -87,7 +87,7 @@ export default class Card extends Component {
                         <Text style={styles.name}>Kucing</Text>
                     </View>
                 </View>
-                <View style={{zIndex: this.state.zIndex, position:"relative"}}>
+                <View>
                     <PinchGestureHandler 
                             ref={this.pinchHandler}
                             onGestureEvent={this.handleGesturePinch} 
@@ -131,11 +131,10 @@ export default class Card extends Component {
 const {width} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-    container: (zIndex, bg) => ({
+    container: (bg) => ({
         backgroundColor: bg,
         width: width,
         position:"relative",
-        zIndex: zIndex
     }),
     image: {
         width: width,
