@@ -10,31 +10,33 @@ export default class ExFlatlist extends Component {
                 {
                     id: '1',
                     name: 'data1',
-                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png'
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'red'
                 },
                 {
                     id: '2',
                     name: 'data2',
-                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png'
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'yellow'
                 },
                 {
                     id: '3',
                     name: 'data3',
-                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png'
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'blue'
                 },
                 {
                     id: '4',
                     name: 'data4',
-                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png'
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'green'
                 },
             ]
         }
     }
 
     renderData = ({item, index}) => (
-        <View>
-            <Card item={item} />
-        </View>
+        <Card item={item}/>
     )
 
     render() {
