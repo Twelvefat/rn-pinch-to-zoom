@@ -40,23 +40,19 @@ export default class Card extends Component {
     
     _onGestureStateChangePinch = (event)=>{
         if (event.nativeEvent.oldState === State.ACTIVE) {
-            this.setState({
-                zIndex:1
-            })
             Animated.spring(this.scale, {
                 toValue: 1.01,
                 useNativeDriver:true
             }).start();
         }
-        if(event.nativeEvent.oldState === State.BEGAN || event.nativeEvent.oldState === State.UNDETERMINED){
-            this.setState({
-                zIndex:10
-            })
-        }
+
     }
 
     _onGestureStateChange = (event) => {
         if (event.nativeEvent.oldState === State.ACTIVE) {
+            this.setState({
+                zIndex:1
+            })
             Animated.spring(this.translateX, {
                 toValue: 1,
                 useNativeDriver:true
@@ -65,6 +61,12 @@ export default class Card extends Component {
                 toValue: 1,
                 useNativeDriver:true
             }).start();
+        }
+
+        if(event.nativeEvent.oldState === State.BEGAN){
+            this.setState({
+                zIndex:10
+            })
         }
     }
 
@@ -75,7 +77,7 @@ export default class Card extends Component {
         const translateX = this.translateX
         const translateY = this.translateY
         return (
-            <Animated.View style={styles.container(item.bg)}>
+            <Animated.View style={styles.container(this.state.zIndex, item.bg)}>
                 <View style={styles.profile}>
                     <View>
                         <Image 
@@ -87,7 +89,7 @@ export default class Card extends Component {
                         <Text style={styles.name}>Kucing</Text>
                     </View>
                 </View>
-                <View>
+                <View style={{zIndex: this.state.zIndex}}>
                     <PinchGestureHandler 
                             ref={this.pinchHandler}
                             onGestureEvent={this.handleGesturePinch} 
@@ -102,19 +104,20 @@ export default class Card extends Component {
                                 simultaneousHandlers={this.pinchHandler}
                             >
                                 <Animated.View>
-                                    <Swiper
+                                    {/* <Swiper
                                         loop={false}
                                         height={width}
-                                    >
-                                        <Animated.Image 
-                                            source={{uri: item.image}}
-                                            style={[styles.image, {
-                                                transform: [{scale}, {translateX}, {translateY}],
-                                                zIndex: this.state.zIndex
-                                            }]}
-                                            resizeMode="cover"
-                                        />
-                                    </Swiper>
+                                    > */}
+                                        <View style={{zIndex: this.state.zIndex}}>
+                                            <Animated.Image 
+                                                source={{uri: item.image}}
+                                                style={[styles.image, {
+                                                    transform: [{scale}, {translateX}, {translateY}],
+                                                }]}
+                                                resizeMode="cover"
+                                            />
+                                        </View>
+                                    {/* </Swiper> */}
                                 </Animated.View>
                             </PanGestureHandler>
                         </Animated.View>
@@ -131,10 +134,11 @@ export default class Card extends Component {
 const {width} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-    container: (bg) => ({
+    container: (zIndex, bg) => ({
         backgroundColor: bg,
         width: width,
         position:"relative",
+        zIndex: zIndex
     }),
     image: {
         width: width,

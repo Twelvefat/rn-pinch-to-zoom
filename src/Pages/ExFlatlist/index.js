@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, FlatList, Text, Dimensions } from 'react-native'
+import { View, FlatList, Text, Dimensions} from 'react-native'
 import { Card } from '../../components/atoms'
+import { ScrollView } from 'react-native-gesture-handler'
 
 export default class ExFlatlist extends Component {
     constructor(props){
@@ -42,13 +43,21 @@ export default class ExFlatlist extends Component {
     render() {
         return (
             <View>
-                <FlatList 
+                {/* <FlatList 
                     data={this.state.data}
                     extraData={this.state}
                     renderItem={this.renderData}
-                    scrollEnabled={this.state.scrollEnabled}
                     contentContainerStyle={{zIndex:1}}
-                />
+                /> */}
+                <ScrollView>
+                    {
+                        this.state.data.map((item, index) => {
+                            return (
+                                <Card item={item} />
+                            )
+                        })
+                    }
+                </ScrollView>
             </View>
         )
     }
