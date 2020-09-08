@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, Text, Dimensions} from 'react-native'
+import { View, FlatList, Text, Dimensions, StyleSheet} from 'react-native'
 import { Card } from '../../components/atoms'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -32,24 +32,45 @@ export default class ExFlatlist extends Component {
                     image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
                     bg: 'green'
                 },
-            ]
+            ],
+            activeIndex: null,
         }
     }
 
-    renderData = ({item, index}) => (
-        <Card item={item}/>
-    )
+    renderData = ({item, index}) => {
+        const zIndex = index === this.state.activeIndex ? 10 : 1;
+        return (
+            <View key={index} style={{zIndex: zIndex}}>
+                <Card item={item} index={index} activeIndex={(val) => this.setState({activeIndex: val})}/>
+            </View>
+        )
+    }
+
+    renderCell = ({index, style, ...props}) => {
+        const { activeIndex } = this.state
+        const zIndex = {
+            zIndex: index === activeIndex ? 2 : 1 
+        }
+        return (
+            <View style={[style, zIndex]} {...props} />
+        )
+    }
+
+    keyExtractor = (item, index) => index.toString()
 
     render() {
         return (
-            <View>
-                {/* <FlatList 
+            <View style={{flex:1}}>
+                <FlatList 
                     data={this.state.data}
-                    extraData={this.state}
+                    extraData={this.state.activeIndex}
+                    // CellRendererComponent={this.renderCell}
                     renderItem={this.renderData}
-                    contentContainerStyle={{zIndex:1}}
-                /> */}
-                <ScrollView>
+                    keyExtractor={this.keyExtractor}
+                    initialNumToRender={10}
+                    style={{zIndex:0}}
+                />
+                {/* <ScrollView>
                     {
                         this.state.data.map((item, index) => {
                             return (
@@ -57,7 +78,7 @@ export default class ExFlatlist extends Component {
                             )
                         })
                     }
-                </ScrollView>
+                </ScrollView> */}
             </View>
         )
     }

@@ -50,9 +50,6 @@ export default class Card extends Component {
 
     _onGestureStateChange = (event) => {
         if (event.nativeEvent.oldState === State.ACTIVE) {
-            this.setState({
-                zIndex:1
-            })
             Animated.spring(this.translateX, {
                 toValue: 1,
                 useNativeDriver:true
@@ -61,12 +58,13 @@ export default class Card extends Component {
                 toValue: 1,
                 useNativeDriver:true
             }).start();
+            this.setState({zIndex: 1})
+            this.props.activeIndex(null)
         }
 
         if(event.nativeEvent.oldState === State.BEGAN){
-            this.setState({
-                zIndex:10
-            })
+            this.setState({zIndex: 2})
+            this.props.activeIndex(this.props.index)
         }
     }
 
@@ -77,7 +75,7 @@ export default class Card extends Component {
         const translateX = this.translateX
         const translateY = this.translateY
         return (
-            <Animated.View style={styles.container(this.state.zIndex, item.bg)}>
+            <Animated.View style={styles.container(item.bg)}>
                 <View style={styles.profile}>
                     <View>
                         <Image 
@@ -95,7 +93,7 @@ export default class Card extends Component {
                             onGestureEvent={this.handleGesturePinch} 
                             onHandlerStateChange={this._onGestureStateChangePinch}
                         >
-                        <Animated.View>
+                        <Animated.View style={{zIndex: this.state.zIndex}}>
                             <PanGestureHandler
                                 ref={this.panHandler}
                                 onGestureEvent={this.handleGesture}
@@ -104,11 +102,11 @@ export default class Card extends Component {
                                 simultaneousHandlers={this.pinchHandler}
                             >
                                 <Animated.View>
-                                    {/* <Swiper
+                                    <Swiper
                                         loop={false}
                                         height={width}
-                                    > */}
-                                        <View style={{zIndex: this.state.zIndex}}>
+                                    >
+                                        <View style={{zIndex: this.state.zIndex, position:"absolute"}}>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -117,7 +115,7 @@ export default class Card extends Component {
                                                 resizeMode="cover"
                                             />
                                         </View>
-                                    {/* </Swiper> */}
+                                    </Swiper>
                                 </Animated.View>
                             </PanGestureHandler>
                         </Animated.View>
@@ -134,11 +132,10 @@ export default class Card extends Component {
 const {width} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-    container: (zIndex, bg) => ({
+    container: (bg) => ({
         backgroundColor: bg,
         width: width,
         position:"relative",
-        zIndex: zIndex
     }),
     image: {
         width: width,
