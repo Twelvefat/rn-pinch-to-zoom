@@ -113,7 +113,7 @@ export default class Card extends Component {
                                         loop={false}
                                         height={width}
                                     > */}
-                                    <ViewPager style={styles.viewPager} initialPage={0} orientation="horizontal" onPageScroll={this.onPageScroll}>
+                                    {/* <ViewPager style={styles.viewPager} initialPage={0} orientation="horizontal" onPageScroll={this.onPageScroll}> */}
                                         <View key="1" style={{zIndex: this.state.zIndex, width: width, height: width}}>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
@@ -123,7 +123,7 @@ export default class Card extends Component {
                                                 resizeMode="cover"
                                             />
                                         </View>
-                                        <View key="2" style={{zIndex: this.state.zIndex}}>
+                                        {/* <View key="2" style={{zIndex: this.state.zIndex, width: width, height: width}}>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -132,7 +132,7 @@ export default class Card extends Component {
                                                 resizeMode="cover"
                                             />
                                         </View>
-                                    </ViewPager>
+                                    </ViewPager> */}
                                     {/* </Swiper> */}
                                 </Animated.View>
                             </PanGestureHandler>
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         backgroundColor:"gray",
         zIndex:0,
+        opacity: 0.5
     },
     viewPager: {
         flex:1,
