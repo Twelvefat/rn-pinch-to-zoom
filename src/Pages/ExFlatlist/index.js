@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, FlatList, Text, Dimensions, StyleSheet} from 'react-native'
+import { View, FlatList, Text, Dimensions, StyleSheet, VirtualizedList} from 'react-native'
 import { Card } from '../../components/atoms'
 import { ScrollView } from 'react-native-gesture-handler'
 
@@ -58,10 +58,27 @@ export default class ExFlatlist extends Component {
 
     keyExtractor = (item, index) => index.toString()
 
+    getItemCount = () => {
+        return this.state.data.length
+    }
+
+    getItem = (data, index) => {
+        return data[index]
+    }
+
     render() {
         return (
             <View style={{flex:1}}>
-                <FlatList 
+                <VirtualizedList 
+                    data={this.state.data}
+                    extraData={this.state}
+                    CellRendererComponent={this.renderCell}
+                    renderItem={this.renderData}
+                    keyExtractor={this.keyExtractor}
+                    getItem={this.getItem}
+                    getItemCount={this.getItemCount}
+                />
+                {/* <FlatList 
                     data={this.state.data}
                     extraData={this.state.activeIndex}
                     // CellRendererComponent={this.renderCell}
@@ -69,7 +86,7 @@ export default class ExFlatlist extends Component {
                     keyExtractor={this.keyExtractor}
                     initialNumToRender={10}
                     style={{zIndex:0}}
-                />
+                /> */}
                 {/* <ScrollView>
                     {
                         this.state.data.map((item, index) => {
