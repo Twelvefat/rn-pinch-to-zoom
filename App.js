@@ -5,6 +5,6 @@ import { ExFlatlist, Absolute, ViewPage } from './src/Pages';
 
 export default () =>(
     <SafeAreaProvider>
-      <ViewPage />
+      <ExFlatlist />
     </SafeAreaProvider>
 )
