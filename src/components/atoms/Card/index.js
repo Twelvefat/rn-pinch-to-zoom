@@ -75,7 +75,7 @@ export default class Card extends Component {
         const translateX = this.translateX
         const translateY = this.translateY
         return (
-            <Animated.View style={styles.container(item.bg)}>
+            <Animated.View style={styles.container(this.state.zIndex, item.bg)}>
                 <View style={styles.profile}>
                     <View>
                         <Image 
@@ -132,10 +132,11 @@ export default class Card extends Component {
 const {width} = Dimensions.get('window')
 
 const styles = StyleSheet.create({
-    container: (bg) => ({
+    container: (zIndex, bg) => ({
         backgroundColor: bg,
         width: width,
         position:"relative",
+        zIndex: zIndex
     }),
     image: {
         width: width,
