@@ -33,6 +33,32 @@ export default class ExFlatlist extends Component {
                     bg: 'green'
                 },
             ],
+            extraData: [
+                {
+                    id: '1',
+                    name: 'data1',
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'red'
+                },
+                {
+                    id: '2',
+                    name: 'data2',
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'yellow'
+                },
+                {
+                    id: '3',
+                    name: 'data3',
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'blue'
+                },
+                {
+                    id: '4',
+                    name: 'data4',
+                    image: 'https://icatcare.org/app/uploads/2018/07/Thinking-of-getting-a-cat.png',
+                    bg: 'green'
+                },
+            ],
             activeIndex: null,
         }
     }
@@ -66,6 +92,12 @@ export default class ExFlatlist extends Component {
         return data[index]
     }
 
+    handleMore = () => {
+        this.setState({
+            data: [...this.state.data, ...this.state.extraData]
+        })
+    }
+
     render() {
         return (
             <View style={{flex:1}}>
@@ -77,6 +109,7 @@ export default class ExFlatlist extends Component {
                     keyExtractor={this.keyExtractor}
                     getItem={this.getItem}
                     getItemCount={this.getItemCount}
+                    onEndReached={this.handleMore}
                 />
                 {/* <FlatList 
                     data={this.state.data}
