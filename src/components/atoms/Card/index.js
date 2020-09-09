@@ -109,12 +109,13 @@ export default class Card extends Component {
                                 simultaneousHandlers={this.pinchHandler}
                             >
                                 <Animated.View>
-                                    {/* <Swiper
+                                    <Swiper
                                         loop={false}
                                         height={width}
-                                    > */}
+                                        style={{zIndex:0}}
+                                    >
                                     {/* <ViewPager style={styles.viewPager} initialPage={0} orientation="horizontal" onPageScroll={this.onPageScroll}> */}
-                                        <View key="1" style={{zIndex: this.state.zIndex, width: width, height: width}}>
+                                        <View style={{zIndex: this.state.zIndex}}>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -123,7 +124,7 @@ export default class Card extends Component {
                                                 resizeMode="cover"
                                             />
                                         </View>
-                                        {/* <View key="2" style={{zIndex: this.state.zIndex, width: width, height: width}}>
+                                        {/* <View style={{zIndex: this.state.zIndex}}>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -131,9 +132,9 @@ export default class Card extends Component {
                                                 }]}
                                                 resizeMode="cover"
                                             />
-                                        </View>
-                                    </ViewPager> */}
-                                    {/* </Swiper> */}
+                                        </View> */}
+                                    {/* </ViewPager> */}
+                                    </Swiper>
                                 </Animated.View>
                             </PanGestureHandler>
                         </Animated.View>
@@ -181,7 +182,6 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         backgroundColor:"gray",
         zIndex:0,
-        opacity: 0.5
     },
     viewPager: {
         flex:1,
