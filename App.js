@@ -5,6 +5,6 @@ import { ExFlatlist, Absolute, ViewPage, Swipe, SwipeImage } from './src/Pages';
 
 export default () =>(
     <SafeAreaProvider>
-      <SwipeImage />
+      <ExFlatlist />
     </SafeAreaProvider>
 )

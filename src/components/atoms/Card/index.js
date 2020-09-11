@@ -3,6 +3,7 @@ import { Animated, Dimensions, StyleSheet, View, Image, Text, ScrollView, FlatLi
 import { PanGestureHandler, PinchGestureHandler, State } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
 import ViewPager from '@react-native-community/viewpager'
+import { SwipeImage } from '../../../Pages'
 export default class Card extends Component {
 
     constructor(props){
@@ -93,13 +94,13 @@ export default class Card extends Component {
                         <Text style={styles.name}>Kucing</Text>
                     </View>
                 </View>
-                <View style={{zIndex: this.state.zIndex}}>
+                <View style={[StyleSheet.absoluteFill, {zIndex: this.state.zIndex}]}>
                     <PinchGestureHandler 
                             ref={this.pinchHandler}
                             onGestureEvent={this.handleGesturePinch} 
                             onHandlerStateChange={this._onGestureStateChangePinch}
                         >
-                        <Animated.View>
+                        <Animated.View style={StyleSheet.absoluteFill}>
                             <PanGestureHandler
                                 ref={this.panHandler}
                                 onGestureEvent={this.handleGesture}
@@ -107,7 +108,8 @@ export default class Card extends Component {
                                 minPointers={2}
                                 simultaneousHandlers={this.pinchHandler}
                             >
-                                <Animated.View>
+                                <Animated.View style={StyleSheet.absoluteFill}>
+                                    <SwipeImage />
                                     {/* <Swiper
                                         loop={false}
                                         height={width}
@@ -116,7 +118,7 @@ export default class Card extends Component {
                                         style={{overflow:"visible"}}
                                     > */}
                                     {/* <ViewPager style={styles.viewPager} initialPage={0} orientation="horizontal" onPageScroll={this.onPageScroll}> */}
-                                        <View>
+                                        {/* <View>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -124,7 +126,7 @@ export default class Card extends Component {
                                                 }]}
                                                 resizeMode="cover"
                                             />
-                                        </View>
+                                        </View> */}
                                         {/* <View>
                                             <Animated.Image 
                                                 source={{uri: item.image}}

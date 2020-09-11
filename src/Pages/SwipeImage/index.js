@@ -35,16 +35,16 @@ const snapPoints = images.map((_, index) => index * -width);
 const styles = StyleSheet.create({
     container: {
         ...StyleSheet.absoluteFillObject,   
-        backgroundColor: "black"
+        backgroundColor: "white"
     },
     pictures: {
         width: width * images.length,
-        height: height,
+        height: width,
         flexDirection:"row"
     },
     picture: {
         width: width,
-        height: height,
+        height: width,
         overflow:"hidden"
     },
     image: {
