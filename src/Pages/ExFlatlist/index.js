@@ -77,8 +77,11 @@ export default class ExFlatlist extends Component {
         const zIndex = {
             zIndex: index === activeIndex ? 2 : 1 
         }
+        const backgroundColor = {
+            backgroundColor: index === activeIndex ? "white":"yellow"
+        }
         return (
-            <View style={[style, zIndex]} {...props} />
+            <View key={index} style={[style, backgroundColor]} {...props} />
         )
     }
 
@@ -101,7 +104,7 @@ export default class ExFlatlist extends Component {
     render() {
         return (
             <View style={{flex:1}}>
-                <VirtualizedList 
+                {/* <VirtualizedList 
                     data={this.state.data}
                     extraData={this.state}
                     CellRendererComponent={this.renderCell}
@@ -110,16 +113,16 @@ export default class ExFlatlist extends Component {
                     getItem={this.getItem}
                     getItemCount={this.getItemCount}
                     onEndReached={this.handleMore}
-                />
-                {/* <FlatList 
+                /> */}
+                <FlatList 
                     data={this.state.data}
-                    extraData={this.state.activeIndex}
-                    // CellRendererComponent={this.renderCell}
+                    extraData={this.state}
+                    CellRendererComponent={this.renderCell}
                     renderItem={this.renderData}
                     keyExtractor={this.keyExtractor}
                     initialNumToRender={10}
-                    style={{zIndex:0}}
-                /> */}
+                    style={{overflow:"visible"}}
+                />
                 {/* <ScrollView>
                     {
                         this.state.data.map((item, index) => {

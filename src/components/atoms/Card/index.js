@@ -1,9 +1,8 @@
 import React, { Component, createRef } from 'react'
-import { Animated, Dimensions, StyleSheet, View, Image, Text } from 'react-native'
+import { Animated, Dimensions, StyleSheet, View, Image, Text, ScrollView, FlatList } from 'react-native'
 import { PanGestureHandler, PinchGestureHandler, State } from 'react-native-gesture-handler'
 import Swiper from 'react-native-swiper'
 import ViewPager from '@react-native-community/viewpager'
-
 export default class Card extends Component {
 
     constructor(props){
@@ -100,7 +99,7 @@ export default class Card extends Component {
                             onGestureEvent={this.handleGesturePinch} 
                             onHandlerStateChange={this._onGestureStateChangePinch}
                         >
-                        <Animated.View style={{zIndex: this.state.zIndex}}>
+                        <Animated.View>
                             <PanGestureHandler
                                 ref={this.panHandler}
                                 onGestureEvent={this.handleGesture}
@@ -109,13 +108,15 @@ export default class Card extends Component {
                                 simultaneousHandlers={this.pinchHandler}
                             >
                                 <Animated.View>
-                                    <Swiper
+                                    {/* <Swiper
                                         loop={false}
                                         height={width}
-                                        style={{zIndex:0}}
-                                    >
+                                        scrollViewStyle={{overflow:"visible"}}
+                                        containerStyle={{overflow:"visible"}}
+                                        style={{overflow:"visible"}}
+                                    > */}
                                     {/* <ViewPager style={styles.viewPager} initialPage={0} orientation="horizontal" onPageScroll={this.onPageScroll}> */}
-                                        <View style={{zIndex: this.state.zIndex}}>
+                                        <View>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -124,7 +125,7 @@ export default class Card extends Component {
                                                 resizeMode="cover"
                                             />
                                         </View>
-                                        {/* <View style={{zIndex: this.state.zIndex}}>
+                                        {/* <View>
                                             <Animated.Image 
                                                 source={{uri: item.image}}
                                                 style={[styles.image, {
@@ -134,7 +135,23 @@ export default class Card extends Component {
                                             />
                                         </View> */}
                                     {/* </ViewPager> */}
-                                    </Swiper>
+                                    {/* </Swiper> */}
+                                    {/* <FlatList 
+                                        // horizontal
+                                        data={[item]}
+                                        style={{overflow: "visible"}}
+                                        renderItem={({item, index}) => {
+                                            return (
+                                                <Animated.Image 
+                                                    source={{uri: item.image}}
+                                                    style={[styles.image, {
+                                                        transform: [{scale}, {translateX}, {translateY}],
+                                                    }]}
+                                                    resizeMode="cover"
+                                                />
+                                            )
+                                        }}
+                                    /> */}
                                 </Animated.View>
                             </PanGestureHandler>
                         </Animated.View>
@@ -182,6 +199,7 @@ const styles = StyleSheet.create({
         paddingBottom:10,
         backgroundColor:"gray",
         zIndex:0,
+        opacity:0.3
     },
     viewPager: {
         flex:1,
